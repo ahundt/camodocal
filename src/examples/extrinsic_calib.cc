@@ -11,6 +11,8 @@
 
 #ifdef HAVE_OPENCV3
 #include <opencv2/imgproc.hpp>
+#else
+#include <opencv2/imgproc/imgproc.hpp>
 #endif // HAVE_OPENCV3
 
 #ifdef HAVE_CUDA

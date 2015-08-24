@@ -52,13 +52,13 @@ camodocal_optional_dependency(Threads)
 # enable GPU enhanced SURF features
 if(CUDA_FOUND)
     add_definitions(-DHAVE_CUDA)
-	message(STATUS "defined HAVE_CUDA")
+    message(STATUS "defined HAVE_CUDA")
 
     set(CUDA_CUDART_LIBRARY_OPTIONAL ${CUDA_CUDART_LIBRARY})
 endif()
 
 if(OpenCV_FOUND)
-	message(STATUS "OpenCV version: "${OpenCV_VERSION})
+	message(STATUS "OpenCV version: ${OpenCV_VERSION}")
     if(NOT OpenCV_VERSION VERSION_LESS "3.0.0")
         add_definitions(-DHAVE_OPENCV3)
 		message(STATUS "defined HAVE_OPENCV3")

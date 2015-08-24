@@ -36,6 +36,6 @@ camodocal_link_libraries(camodocal_DVision
   ${OPENCV_IMGPROC_LIBRARY} 
   ${OPENCV_LEGACY_LIBRARY}
   ${OPENCV_NONFREE_LIBRARY}
-  ${OPENCV_IMGCODECS_LIBRARY}
   camodocal_DUtils
+  ${OPENCV_VERSION_SPECIFIC_LIBRARIES}
 )
