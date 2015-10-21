@@ -1,5 +1,7 @@
 FIND_PATH(CHOLMOD_INCLUDE_DIR NAMES cholmod.h amd.h camd.h
     PATHS
+    ${CHOLMOD_DIR}
+    ~/.linuxbrew/include
     /usr/include/suitesparse
     /usr/include/ufsparse
     /opt/local/include/ufsparse
@@ -10,6 +12,8 @@ FIND_PATH(CHOLMOD_INCLUDE_DIR NAMES cholmod.h amd.h camd.h
   )
 
 set(SUITESPARSE_PATHS 
+  ${SUITESPARSE_DIR}
+  ~/.linuxbrew/lib
   /usr/lib
   /usr/local/lib
   /opt/local/lib

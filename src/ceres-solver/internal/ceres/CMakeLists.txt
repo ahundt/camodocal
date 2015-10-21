@@ -122,6 +122,7 @@ else(${SCHUR_SPECIALIZATIONS})
   file(GLOB CERES_INTERNAL_SCHUR_FILES generated/schur_eliminator_d_d_d.cc)
 endif(${SCHUR_SPECIALIZATIONS})
 
+message(AUTHOR_WARNING "actually creating ceres library here <<<<<<<<<<")
 camodocal_library(ceres
                 ${PROTO_SRCS}
                 ${PROTO_HDRS}
@@ -164,4 +165,7 @@ if(${PROTOBUF_FOUND})
   list(APPEND CERES_LIBRARY_DEPENDENCIES ${PROTOBUF_LIBRARY})
 endif(${PROTOBUF_FOUND})
 
-camodocal_link_libraries(ceres ${CERES_LIBRARY_DEPENDENCIES} ${GFLAGS_LIBRARIES} ${GLOG_LIBRARIES} ${CAMODOCAL_PLATFORM_UNIX_LIBRARIES} ${SUITESPARSE_LIBRARIES} ${TBB_LBRARIES_OPTIONAL})
+# note: CISSTNETLIB_LIBRARIES is a bit of a hack depending on an outside repo.
+#       it may be useful, or just linking netlib direcly may be better.
+#       either way it should be made completely standalone for camodocal
+camodocal_link_libraries(ceres ${CERES_LIBRARY_DEPENDENCIES} ${GFLAGS_LIBRARIES} ${GLOG_LIBRARIES} ${CAMODOCAL_PLATFORM_UNIX_LIBRARIES} ${SUITESPARSE_LIBRARIES} ${TBB_LBRARIES_OPTIONAL} ${CISSTNETLIB_LIBRARIES})

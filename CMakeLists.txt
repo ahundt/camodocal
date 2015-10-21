@@ -3,9 +3,10 @@ cmake_minimum_required(VERSION 2.8.6 FATAL_ERROR)
 project(CAMODOCAL C CXX)
 
 # This sets where to look for modules (e.g. "Find*.cmake" files)
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH})
 
 # Libraries
+LIST(APPEND CMAKE_LIBRARY_PATH ~/.linuxbrew/lib)
 LIST(APPEND CMAKE_LIBRARY_PATH /opt/local/lib)
 LIST(APPEND CMAKE_LIBRARY_PATH /opt/local/lib/ufsparse) # Mac OS X
 LIST(APPEND CMAKE_LIBRARY_PATH /usr/lib)
@@ -16,6 +17,7 @@ LIST(APPEND CMAKE_LIBRARY_PATH /usr/local/homebrew/lib) # Mac OS X
 LIST(APPEND CMAKE_LIBRARY_PATH /usr/local/lib)
 LIST(APPEND CMAKE_LIBRARY_PATH /usr/local/lib/suitesparse)
 # Headers
+LIST(APPEND CMAKE_INCLUDE_PATH ~/.linuxbrew/include)
 LIST(APPEND CMAKE_INCLUDE_PATH /opt/local/include)
 LIST(APPEND CMAKE_INCLUDE_PATH /opt/local/include/ufsparse) # Mac OS X
 LIST(APPEND CMAKE_INCLUDE_PATH /opt/local/var/macports/software/eigen3/opt/local/include/eigen3) # Mac OS X
@@ -104,9 +106,8 @@ configure_file(CamOdoCalConfig.h.in ${CMAKE_CURRENT_BINARY_DIR}/CamOdoCalConfig.
 configure_file(CamOdoCalPathConfig.h.in ${CMAKE_CURRENT_BINARY_DIR}/CamOdoCalPathConfig.h)
 
 ############## Include Directories ##############
-
 # Set the search paths for include files
-include_directories(
+basis_include_directories(
   # External
   ${EIGEN3_INCLUDE_DIR}
   ${OPENCV_INCLUDE_DIRS}

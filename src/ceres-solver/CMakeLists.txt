@@ -1,5 +1,6 @@
 #if(NOT CERES_FOUND)
 if(GLOG_FOUND)
+    message(AUTHOR_WARNING "building ceres<<<<<<<<<<<<<<<<<<<<")
     # Google Logging
     set(GLOG_LIB ${GLOG_LIBRARIES})
     set(GLOG_INCLUDE ${GLOG_INCLUDE_DIRS})
@@ -53,7 +54,7 @@ if(GLOG_FOUND)
     ENDIF (HAVE_STD_UNORDERED_MAP_HEADER)
 
     foreach(CURRENT_CERES_OPTION IN LISTS CERES_COMPILE_OPTIONS)
-        add_definitions(-D${CURRENT_CERES_OPTION})
+        basis_add_definitions(-D${CURRENT_CERES_OPTION})
     endforeach()
 
 option(SCHUR_SPECIALIZATIONS
@@ -61,14 +62,14 @@ option(SCHUR_SPECIALIZATIONS
        ON)
 
 if(NOT ${SCHUR_SPECIALIZATIONS})
-  add_definitions(-DCERES_RESTRICT_SCHUR_SPECIALIZATION)
+  basis_add_definitions(-DCERES_RESTRICT_SCHUR_SPECIALIZATION)
   message("-- Disabling Schur specializations (faster compiles)")
 endif(NOT ${SCHUR_SPECIALIZATIONS})
 
 if(${OPENMP_FOUND})
   message("-- Found OpenMP.")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-  add_definitions(-DCERES_USE_OPENMP)
+  basis_add_definitions(-DCERES_USE_OPENMP)
 else(${OPENMP_FOUND})
   message("-- Can't find OpenMP. Continuing without it.")
 endif(${OPENMP_FOUND})
@@ -77,14 +78,14 @@ endif(${OPENMP_FOUND})
 #  include_directories(${PROTOBUF_INCLUDE_DIRS})
 #  include_directories(${CMAKE_CURRENT_BINARY_DIR}/internal)
 #else(${PROTOBUF_FOUND})
-  add_definitions(-DCERES_NO_PROTOCOL_BUFFERS)
+  basis_add_definitions(-DCERES_NO_PROTOCOL_BUFFERS)
 #endif(${PROTOBUF_FOUND})
 
 if(${UNIX})
   # At least on linux, we need pthreads to be enabled for mutex to
   # compile. This may not work on windows or android.
-  add_definitions(-DCERES_HAVE_PTHREAD)
-  add_definitions(-DCERES_HAVE_RWLOCK)
+  basis_add_definitions(-DCERES_HAVE_PTHREAD)
+  basis_add_definitions(-DCERES_HAVE_RWLOCK)
 endif(${UNIX})
 
 if(${TBB_FOUND})
@@ -96,7 +97,7 @@ endif()
 #add_definitions("\"-DCERES_HASH_NAMESPACE_START=namespace std { namespace tr1 {\"")
 #add_definitions("\"-DCERES_HASH_NAMESPACE_END=}}\"")
 
-include_directories(
+basis_include_directories(
   include
   internal
   internal/ceres

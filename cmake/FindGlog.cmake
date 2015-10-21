@@ -83,12 +83,14 @@ MACRO(GLOG_REPORT_NOT_FOUND REASON_MSG)
 ENDMACRO(GLOG_REPORT_NOT_FOUND)
 # TODO: Add standard Windows search locations for glog.
 LIST(APPEND GLOG_CHECK_INCLUDE_DIRS
+  ~/.linuxbrew/include
   /usr/include
   /usr/local/include
   /usr/local/homebrew/include # Mac OS X
   /opt/local/var/macports/software # Mac OS X.
   /opt/local/include)
 LIST(APPEND GLOG_CHECK_LIBRARY_DIRS
+  ~/.linuxbrew/lib
   /usr/lib
   /usr/local/lib
   /usr/local/homebrew/lib # Mac OS X.
