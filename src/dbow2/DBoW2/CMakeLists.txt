@@ -1,4 +1,4 @@
-include_directories(
+basis_include_directories(
   ../DUtils
   ../DVision
 )
@@ -19,3 +19,5 @@ camodocal_link_libraries(camodocal_DBoW2
   camodocal_DUtilsCV
   camodocal_DVision
 )
+
+camodocal_install(camodocal_DBoW2)

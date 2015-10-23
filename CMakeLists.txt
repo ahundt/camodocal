@@ -2,8 +2,16 @@ cmake_minimum_required(VERSION 2.8.6 FATAL_ERROR)
 
 project(CAMODOCAL C CXX)
 
+
+########################### Misc. Configs ##############################
+# Add custom cmake files folder
+SET (PROJECT_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # This sets where to look for modules (e.g. "Find*.cmake" files)
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH})
+SET (CMAKE_MODULE_PATH "${PROJECT_CMAKE_DIR}" "${CMAKE_MODULE_PATH}" )
+
+# Add custom Install Settings
+INCLUDE(InstallSettings)
+
 
 # Libraries
 LIST(APPEND CMAKE_LIBRARY_PATH ~/.linuxbrew/lib)
@@ -169,10 +177,16 @@ if(VCHARGE_VIZ)
 add_definitions(-DVCHARGE_VIZ)
 endif(VCHARGE_VIZ)
 
+################ Installation project target ################
+
+set(TARGET_NAME ${PROJECT_NAME})
+add_custom_target(${TARGET_NAME} ALL)
+include(GenerateExportHeader)
+
 ################ Sub Directories ################
 
 # Global includes
-include_directories(
+basis_include_directories(
   include
 )
 
@@ -237,6 +251,8 @@ foreach(_name ${__libraries})
     set(_condition ${${_name_upper}_CONDITION})
   else()
     set(_condition " (satisfied)")
+    add_dependencies(${TARGET_NAME} ${_name})
+    generate_export_header(${_name})
   endif()
   print("${_name}${_blanks}${${_name_upper}_BUILD}     ${_condition}")
 endforeach(_name)
@@ -254,6 +270,7 @@ foreach(_name ${__executables})
     set(_condition ${${_name_upper}_CONDITION})
   else()
     set(_condition " (satisfied)")
+    add_dependencies(${TARGET_NAME} ${_name})
   endif()
   print("${_name}${_blanks}${${_name_upper}_BUILD}     ${_condition}")
 endforeach(_name)
@@ -271,8 +288,22 @@ foreach(_name ${__tests})
     set(_condition ${${_name_upper}_CONDITION})
   else()
     set(_condition " (satisfied)")
+    add_dependencies(${TARGET_NAME} ${_name})
   endif()
   print("${_name}${_blanks}${${_name_upper}_BUILD}     ${_condition}")
 endforeach(_name)
 
 print("")
+
+
+
+######################### Installation Stuff ###########################
+
+
+INCLUDE(InstallProjectConfig)
+
+###################### Add uninstall target ############################
+if("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
+    ADD_CUSTOM_TARGET(uninstall
+      COMMAND ${CMAKE_COMMAND} -P ${PROJECT_CMAKE_DIR}/cmake_uninstall.cmake)
+endif()

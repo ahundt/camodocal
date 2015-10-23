@@ -1,5 +1,5 @@
-include_directories(
-  ../ceres-solver/include
+basis_include_directories(
+  ${CERES_INCLUDE_DIRECTORIES}
   ../dbow2/DBoW2
   ../dbow2/DUtils
   ../dbow2/DUtilsCV

@@ -1,5 +1,6 @@
-include_directories(
-  ../ceres-solver/include
+if(OPENCV_FOUND)
+basis_include_directories(
+  ${CERES_INCLUDE_DIRECTORIES}
 )
 
 set_source_files(GPL_SRC_FILES
@@ -15,3 +16,6 @@ camodocal_link_libraries(camodocal_gpl
   ceres
   ${CERES_LIBRARIES}
 )
+
+camodocal_install(camodocal_gpl)
+endif(OPENCV_FOUND)

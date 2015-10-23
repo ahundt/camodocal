@@ -1,5 +1,6 @@
-include_directories(
-  ../ceres-solver/include
+if(OPENCV_FOUND)
+basis_include_directories(
+  ${CERES_INCLUDE_DIRECTORIES}
   ../dbow2/DBoW2
   ../dbow2/DUtils
   ../dbow2/DUtils
@@ -39,3 +40,4 @@ camodocal_link_libraries(camodocal_infrastr_calib
 camodocal_install(camodocal_infrastr_calib)
 
 endif(VCHARGE_VIZ)
+endif(OPENCV_FOUND)

@@ -3,7 +3,7 @@ add_subdirectory(DUtils)
 add_subdirectory(DUtilsCV)
 add_subdirectory(DVision)
 
-include_directories(
+basis_include_directories(
   DBoW2
   DUtils
   DUtilsCV
