@@ -169,3 +169,5 @@ endif(${PROTOBUF_FOUND})
 #       it may be useful, or just linking netlib direcly may be better.
 #       either way it should be made completely standalone for camodocal
 camodocal_link_libraries(ceres ${CERES_LIBRARY_DEPENDENCIES} ${GFLAGS_LIBRARIES} ${GLOG_LIBRARIES} ${CAMODOCAL_PLATFORM_UNIX_LIBRARIES} ${SUITESPARSE_LIBRARIES} ${TBB_LBRARIES_OPTIONAL} ${CISSTNETLIB_LIBRARIES})
+
+camodocal_install(ceres)

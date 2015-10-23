@@ -114,6 +114,7 @@ configure_file(CamOdoCalConfig.h.in ${CMAKE_CURRENT_BINARY_DIR}/CamOdoCalConfig.
 configure_file(CamOdoCalPathConfig.h.in ${CMAKE_CURRENT_BINARY_DIR}/CamOdoCalPathConfig.h)
 
 ############## Include Directories ##############
+
 # Set the search paths for include files
 basis_include_directories(
   # External
@@ -307,3 +308,4 @@ if("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
     ADD_CUSTOM_TARGET(uninstall
       COMMAND ${CMAKE_COMMAND} -P ${PROJECT_CMAKE_DIR}/cmake_uninstall.cmake)
 endif()
+
